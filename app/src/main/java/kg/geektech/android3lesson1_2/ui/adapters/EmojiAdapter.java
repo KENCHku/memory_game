@@ -44,6 +44,9 @@ public class EmojiAdapter extends RecyclerView.Adapter<EmojiAdapter.CustomConten
         return emojiGame.getCards().size();
     }
 
+    //◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉ViewHolder◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
+
+
     class CustomContentHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvCard;

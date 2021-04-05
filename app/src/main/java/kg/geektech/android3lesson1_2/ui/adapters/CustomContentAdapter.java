@@ -15,7 +15,6 @@ import kg.geektech.android3lesson1_2.R;
 import kg.geektech.android3lesson1_2.domain.Card;
 import kg.geektech.android3lesson1_2.domain.CustomContent;
 import kg.geektech.android3lesson1_2.ui.CustomContentGame;
-import kg.geektech.android3lesson1_2.ui.EmojiGame;
 
 @RequiresApi(api = Build.VERSION_CODES.R)
 public class CustomContentAdapter extends RecyclerView.Adapter<CustomContentAdapter.CustomContentHolder> {
@@ -65,13 +64,13 @@ public class CustomContentAdapter extends RecyclerView.Adapter<CustomContentAdap
             }
             itemView.setOnClickListener(v -> {
                 customContentGame.choose(card);
-                listener.choose();
+                listener.choose(card);
             });
         }
     }
 
     public interface Listener {
-        void choose();
+        void choose(Card<CustomContent> card);
     }
 }
 

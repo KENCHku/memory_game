@@ -65,14 +65,7 @@ public class Game<Content> {
                 card.setFaceUp(false);
                 secondCard.setFaceUp(false);
                 Log.e("TAG", "cards are not same");
-            }//,
-         /* for (int i = 0; i < cards.size(); i++) {
-            if (cards.get(i).isFaceUp()
-                    && cards.get(i).getContent() == card.getContent()
-                    && cards.get(i).getId() != card.getId()) {
-                Log.d("tag", "MATCH");
             }
-        }*/
         }
     }
 

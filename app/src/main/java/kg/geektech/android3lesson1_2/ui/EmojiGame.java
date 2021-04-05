@@ -20,7 +20,7 @@ public class EmojiGame {
     @RequiresApi(api = Build.VERSION_CODES.R)
     public EmojiGame(Context context) {
         this.context=context;
-        game = new Game<>(List.of("#", "%", "@"));
+        game = new Game<>(List.of("❤", "🎃", "👹", "😎", "👽"));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
