@@ -12,13 +12,13 @@ import android.util.Log;
 import kg.geektech.android3lesson1_2.R;
 import kg.geektech.android3lesson1_2.domain.Card;
 import kg.geektech.android3lesson1_2.domain.CustomContent;
-import kg.geektech.android3lesson1_2.ui.adapters.CustomContentAdapter;
+import kg.geektech.android3lesson1_2.ui.adapters.EmojiAdapter;
 
-public class MainActivity extends AppCompatActivity implements  CustomContentAdapter.Listener {
+public class MainActivity extends AppCompatActivity implements  EmojiAdapter.Listener {
 
     private RecyclerView recyclerView;
-    private CustomContentGame customContentGame;
-    private /*EmojiAdapter*/CustomContentAdapter emojiAdapter;
+    private EmojiGame emojiGame;
+    private EmojiAdapter emojiAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -26,26 +26,26 @@ public class MainActivity extends AppCompatActivity implements  CustomContentAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        customContentGame= new CustomContentGame(this);
-        emojiAdapter = new CustomContentAdapter(this, customContentGame);
+        emojiGame = new EmojiGame(this);
+        emojiAdapter = new EmojiAdapter(emojiGame,this );
         recyclerView =findViewById(R.id.rv_cards);
         recyclerView.setAdapter(emojiAdapter);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-      CustomContent customContent =  new CustomContent(1,"Card 1", 15.0);
-      CustomContent customContent2 =  new CustomContent(1,"Card 1", 15.0);
-      Log.d("tag1", String.valueOf(customContent.equals(customContent2)));
+      //CustomContent customContent =  new CustomContent(1,"Card 1", 15.0);
+      //CustomContent customContent2 =  new CustomContent(1,"Card 1", 15.0);
+     //Log.d("tag1", String.valueOf(customContent.equals(customContent2)));
 
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    public void choose(Card<CustomContent> card) {
 
-        Log.e("tag", "cardClick: "+ card.getId());
+    @Override
+    public void choose(Card<String> card) {
+        emojiGame.choose(card);
+        Log.e("tag", "choose: "+ card.getId());
         emojiAdapter.notifyDataSetChanged();
     }
 }

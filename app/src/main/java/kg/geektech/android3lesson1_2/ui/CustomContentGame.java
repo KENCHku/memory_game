@@ -22,10 +22,13 @@ public class CustomContentGame {
     @RequiresApi(api = Build.VERSION_CODES.R)
     public CustomContentGame(Context context) {
         this.context=context;
-        game = new Game<>(List.of(
-                new CustomContent(1,"Card 1", 15.0),
-                new CustomContent(2,"Card 2", 13.0),
-                new CustomContent(3,"Card 3", 13.0)
+        game = new Game<CustomContent>(List.of(
+                new CustomContent(1,"Card 1", 11.0),
+                new CustomContent(2,"Card 2", 12.0),
+                new CustomContent(3,"Card 3", 13.0),
+                new CustomContent(4,"Card 4", 14.0),
+                new CustomContent(5,"Card 5", 15.0),
+                new CustomContent(6,"Card 6", 16.0)
         ));
     }
 

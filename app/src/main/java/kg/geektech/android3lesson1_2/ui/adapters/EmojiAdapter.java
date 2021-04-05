@@ -65,13 +65,13 @@ public class EmojiAdapter extends RecyclerView.Adapter<EmojiAdapter.CustomConten
                 tvCard.setBackgroundColor(Color.BLUE);
             }
             itemView.setOnClickListener(v -> {
-                emojiGame.choose(card);
-                listener.choose();
+                listener.choose(card);
+                notifyDataSetChanged();
             });
         }
     }
 
     public interface Listener {
-        void choose();
+        void choose(Card<String> card);
     }
 }

@@ -1,9 +1,9 @@
 package kg.geektech.android3lesson1_2.domain;
 
+import android.os.Handler;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,13 +23,67 @@ public class Game<Content> {
 
     public void choose(Card<Content> card) {
         card.setFaceUp(!card.isFaceUp());
-        checkPairs(card);
+        if (card.isFaceUp()) {
+            checkPair(card);
+        }
         isGameFinished();
 
     }
 
+    private void checkPair(Card<Content> card) {
+
+        for (Card<Content> secondCard : cards) {
+            Log.e("TAG", "for each is running: ");
+
+            if (secondCard.isFaceUp()
+                    && secondCard.getId() != card.getId()
+                    && secondCard.equals(card)) {
+
+                card.setMatch(true);
+                secondCard.setMatch(true);
+
+                removeCard();
+                Log.e("TAG", "MATCH!");
+                return;
+
+            } else if (
+                    secondCard.isFaceUp()
+                            && secondCard.getId() != card.getId()
+                            && secondCard.getContent() != card.getContent()) {
+
+                android.os.Handler handler = new Handler();
+                handler.postDelayed(() -> {
+
+                    card.setFaceUp(false);
+                    secondCard.setFaceUp(false);
+                    Log.e("TAG", "we are in else if");
+
+                }, 300);
+            }
+        }
+    }
+
+    private void removeCard() {
+        Log.e("TAG", "removeCard: method is working  ");
+
+        List<Card<Content>> resultCards = new ArrayList<>(cards);
+        for (Card<Content> c : cards) {
+            if (c.isMatch()) {
+                resultCards.remove(c);
+            }
+        }
+        cards.clear();
+        cards.addAll(resultCards);
+    }
+
+
+    public List<Card<Content>> getCards() {
+        return cards;
+    }
+
+
     private void isGameFinished() {
-        if (cards.isEmpty()){
+        if (cards.isEmpty()) {
             setGameOver(true);
         }
     }
@@ -39,55 +93,6 @@ public class Game<Content> {
     }
 
     private void setGameOver(boolean gameOver) {
-        isGameOver= gameOver;
+        isGameOver = gameOver;
     }
-
-    private void checkPairs(Card<Content> card) {
-
-        for (Card<Content> secondCard : cards) {
-            Log.d("TAG", "for each is running: ");
-
-            if (card.isFaceUp() && secondCard.isFaceUp()
-                    && card.getId() != secondCard.getId()
-                    && card.equals(secondCard)) {
-
-                card.setMatch(true);
-                secondCard.setMatch(true);
-                Log.d("TAG", "MATCH!");
-
-                removeSameCards();
-
-            } else if (card.isFaceUp() && secondCard.isFaceUp()
-                    && card.getId() != secondCard.getId()
-                    && !card.equals(secondCard)) {
-
-
-                card.setFaceUp(false);
-                secondCard.setFaceUp(false);
-                Log.e("TAG", "cards are not same");
-            }
-        }
-    }
-
-    private void removeSameCards() {
-        Log.e("TAG", "removeSameCards: method is working  ");
-
-        List<Card<Content>> resultCards =new ArrayList<>(cards);
-        for (Card<Content> c : cards) {
-            if (c.isMatch()){
-                resultCards.remove(c);
-            }
-        }
-        cards.clear();
-        cards.addAll(resultCards);
-
-    }
-
-
-
-
-    public List<Card<Content>> getCards() {
-        return cards;
-    }
-
 }

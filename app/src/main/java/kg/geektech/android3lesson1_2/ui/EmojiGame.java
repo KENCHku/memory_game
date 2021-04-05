@@ -18,10 +18,12 @@ public class EmojiGame {
     private final Context context;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
+
     public EmojiGame(Context context) {
         this.context=context;
         game = new Game<>(List.of("❤", "🎃", "👹", "😎", "👽"));
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void choose(Card<String> card) {
